@@ -1,0 +1,555 @@
+{% extends "./base.html" %}
+
+<!-- {% block title %} 
+Gestión de categorias 
+{% endblock%}  -->
+
+{% block body %}
+
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-dismissible alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong class="text-dark">{{ message }}</strong>
+    </div>
+    {% endfor %} {% endif %}
+    <h4>Gestión de empresas</h4>
+    <div class="card">
+      <div class="card-body" style="background-color: steelblue;"">
+        <form action="registrarEmpresa/" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtNombre"
+                  name="txtNombre"
+                  class="form-control"
+                  placeholder="Nombre"
+                  minlength="3"
+                  maxlength="100"
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtTelefono"
+                  name="txtTelefono"
+                  class="form-control"
+                  placeholder="Teléfono"
+                  minlength="3"
+                  maxlength="17"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtCiudad"
+                  name="txtCiudad"
+                  class="form-control"
+                  placeholder="Ciudad"
+                  minlength="3"
+                  maxlength="50"
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtEstado"
+                  name="txtEstado"
+                  class="form-control"
+                  placeholder="Estado"
+                  minlength="3"
+                  maxlength="50"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <select
+              class="custom-select"
+              id="pais"
+              name="txtPais"
+              style="margin-bottom: 20px"
+            >
+              <option value="">País</option>
+              <option value="Argentina">Argentina</option>
+              <option value="Brasil">Brasil</option>
+              <option value="Bolivia">Bolivia</option>
+              <option value="Brasil">Brasil</option>
+              <option value="Chile">Chile</option>
+              <option value="Colombia">Colombia</option>
+              <option value="Costa Rica">Costa Rica</option>
+              <option value="Ecuador">Ecuador</option>
+              <option value="El Salvador">El Salvador</option>
+              <option value="España">España</option>
+              <option value="Estados Unidos">Estados Unidos</option>
+              <option value="Guatemala">Guatemala</option>
+              <option value="Honduras">Honduras</option>
+              <option value="México">México</option>
+              <option value="Nicaragua">Nicaragua</option>
+              <option value="Panamá">Panamá</option>
+              <option value="Paraguay">Paraguay</option>
+              <option value="Perú">Perú</option>
+              <option value="Puerto Rico">Puerto Rico</option>
+              <option value="República Dominicana">Rep. Dominicana</option>
+              <option value="Uruguay">Uruguay</option>
+              <option value="Venezuela">Venezuela</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtImagen"
+              name="txtImagen"
+              class="form-control"
+              placeholder="Imagen"
+              minlength="3"
+              maxlength="50"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtFavicon"
+              name="txtFavicon"
+              class="form-control"
+              placeholder="Favicon"
+              minlength="3"
+              maxlength="50"
+            />
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtTituloPagina"
+                  name="txtTituloPagina"
+                  class="form-control"
+                  placeholder="Título de Página"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtRuta"
+                  name="txtRuta"
+                  class="form-control"
+                  placeholder="Ruta"
+                  maxlength="150"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtSubDominio"
+                  name="txtSubDominio"
+                  class="form-control"
+                  placeholder="Sub Dominio"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtApodo"
+                  name="txtApodo"
+                  class="form-control"
+                  placeholder="Apodo"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="email"
+                  id="txtEmail"
+                  name="txtEmail"
+                  class="form-control"
+                  placeholder="Email"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtFacebook"
+                  name="txtFacebook"
+                  class="form-control"
+                  placeholder="Facebook"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtTwitter"
+                  name="txtTwitter"
+                  class="form-control"
+                  placeholder="Twitter"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtInstagram"
+                  name="txtInstagram"
+                  class="form-control"
+                  placeholder="Instagram"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtYoutube"
+                  name="txtYoutube"
+                  class="form-control"
+                  placeholder="Youtube"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtLinkedin"
+                  name="txtLinkedin"
+                  class="form-control"
+                  placeholder="Linkedin"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="contenedor">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="txtTitulo1"
+                    name="txtTitulo1"
+                    class="form-control"
+                    placeholder="Titulo 1"
+                    maxlength="100"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="txtSubTitulo1"
+                    name="txtSubTitulo1"
+                    class="form-control"
+                    placeholder="SubTitulo 1"
+                    maxlength="200"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <textarea
+                class="form-control"
+                placeholder="Descripcion 1"
+                id="txtDescripcion1"
+                maxlength="500"
+              ></textarea>
+            </div>
+          </div>
+          <div class="contenedor">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="txtTitulo2"
+                    name="txtTitulo2"
+                    class="form-control"
+                    placeholder="Titulo 2"
+                    maxlength="100"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="txtSubTitulo2"
+                    name="txtSubTitulo2"
+                    class="form-control"
+                    placeholder="SubTitulo 2"
+                    maxlength="200"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <textarea
+                class="form-control"
+                placeholder="Descripcion 2"
+                id="txtDescripcion2"
+                maxlength="500"
+              ></textarea>
+            </div>
+          </div>
+          <div class="contenedor">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="txtTitulo3"
+                    name="txtTitulo3"
+                    class="form-control"
+                    placeholder="Titulo 3"
+                    maxlength="100"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="txtSubTitulo3"
+                    name="txtSubTitulo3"
+                    class="form-control"
+                    placeholder="SubTitulo 3"
+                    maxlength="200"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <textarea
+                class="form-control"
+                placeholder="Descripcion 3"
+                id="txtDescripcion3"
+                maxlength="500"
+              ></textarea>
+            </div>
+          </div>
+          <div class="contenedor">
+            <div class="form-group">
+              <label for="imagen">Imagen #1:</label>
+              <input type="file" id="txtImagen1" name="txtImagen1" />
+            </div>
+            <div class="form-group">
+              <label for="imagen">Imagen #2:</label>
+              <input type="file" id="txtImagen2" name="txtImagen2" />
+            </div>
+            <div class="form-group">
+              <label for="imagen">Imagen #3:</label>
+              <input type="file" id="txtImagen3" name="txtImagen3" />
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtDireccion"
+              name="txtDireccion"
+              class="form-control"
+              placeholder="Direccion"
+              maxlength="100"
+            />
+          </div>
+          <div class="form-group">
+            <select
+              class="custom-select"
+              id="txtGateway"
+              name="txtGateway"
+              style="margin-bottom: 20px"
+            >
+              <option value="">Gateway</option>
+              <option value="Paypal">Paypal</option>
+              <option value="MercadoLibre">MercadoLibre</option>
+              <option value="Stripe">Stripe</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select
+              class="custom-select"
+              id="txtEnvironment"
+              name="txtEnvironment"
+              style="margin-bottom: 20px"
+            >
+              <option value="">Environment</option>
+              <option value="Sandbox">Sandbox</option>
+              <option value="Produccion">Producción</option>
+            </select>
+          </div>
+          <div class="contenedor">
+            <div class="form-group">
+              <input
+                type="text"
+                id="txtSandbox"
+                name="txtSandbox"
+                class="form-control"
+                placeholder="Sandbox"
+                maxlength="80"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                id="txtProduccion"
+                name="txtProduccion"
+                class="form-control"
+                placeholder="Produccion"
+                maxlength="80"
+              />
+            </div>
+          </div>
+          <div class="contenedor">
+            <div class="form-group">
+              <input
+                type="text"
+                id="txtSecret"
+                name="txtSecret"
+                class="form-control"
+                placeholder="Secret"
+                maxlength="80"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                id="txtAccessToken"
+                name="txtAccessToken"
+                class="form-control"
+                placeholder="Access Token"
+                maxlength="80"
+              />
+            </div>
+          </div>
+          <div class="contenedor">
+            <div class="form-group">
+              <input
+                type="text"
+                id="txtPublicaStripe"
+                name="txtPublicaStripe"
+                class="form-control"
+                placeholder="Publica Stripe"
+                maxlength="110"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                id="txtSecretaStripe"
+                name="txtSecretaStripe"
+                class="form-control"
+                placeholder="Secreta Stripe"
+                maxlength="110"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <select
+              class="custom-select"
+              id="txtStatus"
+              name="txtStatus"
+              style="margin-bottom: 20px"
+            >
+              <option value="">Status</option>
+              <option value="Inactivo">Inactivo</option>
+              <option value="Activo">Activo</option>
+              <option value="Eliminado">Eliminado</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-warning btn-block">
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+    <h1>Listado de Empresas</h1>
+    <div class="table-responsive py-2">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Ciudad</th>
+            <th>Teléfono</th>
+            <th colspan="2">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in empresas %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{c.nombre}}</td>
+            <td>{{c.ciudad}}</td>
+            <td>{{c.telefono}}</td>
+            <td>
+              <a href="edicionEmpresa/{{c.id}}" class="btn btn-info">Editar</a>
+            </td>
+            <td>
+              <a
+                href="eliminacionEmpresa/{{c.id}}"
+                class="btn btn-danger btnEliminacion"
+                >Eliminar</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<style>
+  .contenedor {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+</style>
+
+{% endblock %}

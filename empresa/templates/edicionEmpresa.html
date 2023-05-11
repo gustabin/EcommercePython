@@ -1,0 +1,77 @@
+{% extends "./base.html" %}
+
+<!-- {% block title %} 
+Gestión de categorias 
+{% endblock%}  -->
+
+{% block body %}
+<div class="row">
+  <div class="col-md-4 offset-md-4">
+    <h2>Edición de empresa</h2>
+    <div class="card">
+      <div class="card-body">
+        <form action="./../editarEmpresa/" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtId"
+              name="txtId"
+              class="form-control"
+              placeholder="Id"
+              minlength="3"
+              maxlength="11"
+              required
+              value="{{empresa.id}}"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtNombre"
+              name="txtNombre"
+              class="form-control"
+              placeholder="Nombre"
+              minlength="3"
+              maxlength="100"
+              required
+              value="{{empresa.nombre}}"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtTelefono"
+              name="txtTelefono"
+              class="form-control"
+              placeholder="Teléfono"
+              minlength="3"
+              maxlength="17"
+              required
+              value="{{empresa.telefono}}"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtCiudad"
+              name="txtCiudad"
+              class="form-control"
+              minlength="3"
+              maxlength="50"
+              required
+              value="{{empresa.ciudad}}"
+            />
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-block text-white">
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

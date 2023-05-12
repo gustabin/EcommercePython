@@ -1,0 +1,82 @@
+{% extends "./base.html" %}
+
+<!-- {% block title %} 
+Gestión de categorias 
+{% endblock%}  -->
+
+{% block body %}
+<div class="row">
+  <div class="col-md-4 offset-md-4">
+    <h2>Edición de marca</h2>
+    <div class="card">
+      <div class="card-body">
+        <form action="./../editarMarca/" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <input
+              type="hidden"
+              id="txtId"
+              name="txtId"              
+              value="{{marca.id}}"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtNombre"
+              name="txtNombre"
+              class="form-control"
+              placeholder="Nombre"
+              minlength="3"
+              maxlength="100"
+              required
+              value="{{marca.nombre}}"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtDescripcion"
+              name="txtDescripcion"
+              class="form-control"
+              placeholder="Descripción"
+              minlength="3"
+              maxlength="17"
+              required
+              value="{{marca.descripcion}}"
+            />
+          </div>
+          <div class="form-group">
+            <select
+              class="custom-select"
+              id="txtMostrarMarcas"
+              name="txtMostrarMarcas"
+              style="margin-bottom: 20px"
+            >
+              <option value="1"{% if marca.mostrarMarcas == 1 %} selected{% endif %}>Mostrar</option>
+              <option value="0"{% if marca.mostrarMarcas == 0 %} selected{% endif %}>Ocultar</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select
+              class="custom-select"
+              id="txtStatus"
+              name="txtStatus"
+              style="margin-bottom: 20px"
+            >
+                <option value="0"{% if marca.status == 0 %} selected{% endif %}>Inactivo</option>
+                <option value="1"{% if marca.status == 1 %} selected{% endif %}>Activo</option>
+                <option value="2"{% if marca.status == 2 %} selected{% endif %}>Eliminado</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-block text-white">
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

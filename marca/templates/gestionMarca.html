@@ -1,0 +1,209 @@
+{% extends "./base.html" %}
+
+<!-- {% block title %} 
+Gestión de categorias 
+{% endblock%}  -->
+
+{% block body %}
+
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-dismissible alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong class="text-dark">{{ message }}</strong>
+    </div>
+    {% endfor %} {% endif %}
+    <h4>Gestión de marcas</h4>
+    <div class="card">
+      <div class="card-body" style="background-color: steelblue">
+        <h2>Upload File</h2>
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <input type="file" name="file" />
+          <br /><br />
+          <button type="submit">Upload</button>
+        </form>
+        {% if file_url %}
+        <p>File uploaded successfully:</p>
+        <img src="{{ file_url }}" alt="{{ file_url }}" />
+        {% endif %}
+        <form
+          action="registrarMarca/"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtNombre"
+                  name="txtNombre"
+                  class="form-control"
+                  placeholder="Título"
+                  minlength="3"
+                  maxlength="100"
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtDescripcion"
+                  name="txtDescripcion"
+                  class="form-control"
+                  placeholder="Descripción"
+                  minlength="3"
+                  maxlength="500"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <select
+              class="custom-select"
+              id="txtMostrarMarcas"
+              name="txtMostrarMarcas"
+              style="margin-bottom: 20px"
+            >
+              <option value="1">Mostrar</option>
+              <option value="0">Ocultar</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select
+              class="custom-select"
+              id="txtStatus"
+              name="txtStatus"
+              style="margin-bottom: 20px"
+            >
+              <option value="0">Inactiva</option>
+              <option value="1">Activa</option>
+              <option value="2">Eliminada</option>
+            </select>
+          </div>
+          <!-- <div class="form-group">
+            <input
+              type="text"
+              id="txtEmpresaId"
+              name="txtEmpresaId"
+              class="form-control"
+              placeholder="EmpresaId"
+              maxlength="11"
+            />
+          </div> -->
+          <div class="contenedor">
+            <div class="form-group">
+              <label for="imagen">Logo #1:</label>
+              <input type="file" id="txtLogo1" name="txtLogo1" />
+            </div>
+            <div class="form-group">
+              <label for="imagen">Logo #2:</label>
+              <input type="file" id="txtLogo2" name="txtLogo2" />
+            </div>
+            <div class="form-group">
+              <label for="imagen">Logo #3:</label>
+              <input type="file" id="txtLogo3" name="txtLogo3" />
+            </div>
+            <div class="form-group">
+              <label for="imagen">Logo #4:</label>
+              <input type="file" id="txtLogo4" name="txtLogo4" />
+            </div>
+            <div class="form-group">
+              <label for="imagen">Logo #5:</label>
+              <input type="file" id="txtLogo5" name="txtLogo5" />
+            </div>
+            <div class="form-group">
+              <label for="imagen">Logo #6:</label>
+              <input type="file" id="txtLogo6" name="txtLogo6" />
+            </div>
+            <div class="form-group">
+              <label for="imagen">Logo #7:</label>
+              <input type="file" id="txtLogo7" name="txtLogo7" />
+            </div>
+            <div class="form-group">
+              <label for="imagen">Logo #8:</label>
+              <input type="file" id="txtLogo8" name="txtLogo8" />
+            </div>
+            <div class="form-group">
+              <label for="imagen">Logo #9:</label>
+              <input type="file" id="txtLogo9" name="txtLogo9" />
+            </div>
+            <div class="form-group">
+              <label for="imagen">Logo #10:</label>
+              <input type="file" id="txtLogo10" name="txtLogo10" />
+            </div>
+            <div class="form-group">
+              <label for="imagen">Logo #11:</label>
+              <input type="file" id="txtLogo11" name="txtLogo11" />
+            </div>
+            <div class="form-group">
+              <label for="imagen">Logo #12:</label>
+              <input type="file" id="txtLogo12" name="txtLogo12" />
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-warning btn-block">
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+    <h1>Listado de Marcas</h1>
+    <div class="table-responsive py-2">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Status</th>
+            <th>Logo #1</th>
+            <th>Empresa Id</th>
+            <th colspan="2">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in marcas %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{c.nombre}}</td>
+            <td>{{c.descripcion}}</td>
+            <td>{{c.status}}</td>
+            <td>{{c.logo1}}</td>
+            <td>{{c.empresa_id}}</td>
+            <td>
+              <a href="edicionMarca/{{c.id}}" class="btn btn-info">Editar</a>
+            </td>
+            <td>
+              <a
+                href="eliminacionMarca/{{c.id}}"
+                class="btn btn-danger btnEliminacion"
+                >Eliminar</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<style>
+  .contenedor {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+</style>
+
+{% endblock %}

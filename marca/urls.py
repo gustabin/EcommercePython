@@ -7,5 +7,5 @@ urlpatterns = [
     path('eliminacionMarca/<id>', views.eliminacionMarca),
     path('edicionMarca/<id>', views.edicionMarca),
     path('editarMarca/', views.editarMarca), 
-    path('upload/', views.upload, name='upload'),
 ]
+

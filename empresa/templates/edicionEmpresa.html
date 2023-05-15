@@ -6,11 +6,11 @@ Gestión de categorias
 
 {% block body %}
 <div class="row">
-  <div class="col-md-4 offset-md-4">
+  <div class="col-md-8 offset-md-2">
     <h2>Edición de empresa</h2>
     <div class="card">
       <div class="card-body">
-        <form action="./../editarEmpresa/" method="POST">
+        <form action="./../editarEmpresa/" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="form-group">
             <input
@@ -26,47 +26,626 @@ Gestión de categorias
               readonly
             />
           </div>
-          <div class="form-group">
-            <input
-              type="text"
-              id="txtNombre"
-              name="txtNombre"
-              class="form-control"
-              placeholder="Nombre"
-              minlength="3"
-              maxlength="100"
-              required
-              value="{{empresa.nombre}}"
-            />
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtNombre"
+                  name="txtNombre"
+                  class="form-control"
+                  placeholder="Nombre"
+                  minlength="3"
+                  maxlength="100"
+                  required
+                  value="{{empresa.nombre}}"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtTelefono"
+                  name="txtTelefono"
+                  class="form-control"
+                  placeholder="Teléfono"
+                  minlength="3"
+                  maxlength="17"
+                  required
+                  value="{{empresa.telefono}}"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtCiudad"
+                  name="txtCiudad"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="50"
+                  required
+                  value="{{empresa.ciudad}}"
+                  placeholder="ciudad"
+                />
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtEstado"
+                  name="txtEstado"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="50"
+                  value="{{empresa.estado}}"
+                  placeholder="estado"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <select
+                class="custom-select"
+                id="pais"
+                name="txtPais"
+                style="margin-bottom: 20px"
+              >
+                <option value="Argentina"{% if empresa.pais == 'Argentina' %} selected{% endif %}>Argentina</option>
+                <option value="Brasil"{% if empresa.pais == 'Brasil' %} selected{% endif %}>Brasil</option>
+                <option value="Bolivia"{% if empresa.pais == 'Bolivia' %} selected{% endif %}>Bolivia</option>
+                <option value="Chile"{% if empresa.pais == 'Chile' %} selected{% endif %}>Chile</option>
+                <option value="Colombia"{% if empresa.pais == 'Colombia' %} selected{% endif %}>Colombia</option>
+                <option value="Costa Rica"{% if empresa.pais == 'Costa Rica' %} selected{% endif %}>Costa Rica</option>
+                <option value="Ecuador"{% if empresa.pais == 'Ecuador' %} selected{% endif %}>Ecuador</option>
+                <option value="El Salvador"{% if empresa.pais == 'El Salvador' %} selected{% endif %}>El Salvador</option>
+                <option value="España"{% if empresa.pais == 'España' %} selected{% endif %}>España</option>
+                <option value="Estados Unidos"{% if empresa.pais == 'Estados Unidos' %} selected{% endif %}>Estados Unidos</option>
+                <option value="Guatemala"{% if empresa.pais == 'Guatemala' %} selected{% endif %}>Guatemala</option>
+                <option value="Honduras"{% if empresa.pais == 'Honduras' %} selected{% endif %}>Honduras</option>
+                <option value="México"{% if empresa.pais == 'México' %} selected{% endif %}>México</option>
+                <option value="Nicaragua"{% if empresa.pais == 'Nicaragua' %} selected{% endif %}>Nicaragua</option>
+                <option value="Panamá"{% if empresa.pais == 'Panamá' %} selected{% endif %}>Panamá</option>
+                <option value="Paraguay"{% if empresa.pais == 'Paraguay' %} selected{% endif %}>Paraguay</option>
+                <option value="Perú"{% if empresa.pais == 'Perú' %} selected{% endif %}>Perú</option>
+                <option value="Puerto Rico"{% if empresa.pais == 'Puerto Rico' %} selected{% endif %}>Puerto Rico</option>
+                <option value="República Dominicana"{% if empresa.pais == 'República Dominicana' %} selected{% endif %}>República Dominicana</option>
+                <option value="Uruguay"{% if empresa.pais == 'Uruguay' %} selected{% endif %}>Uruguay</option>
+                <option value="Venezuela"{% if empresa.pais == 'Venezuela' %} selected{% endif %}>Venezuela</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <img
+                  src="{{MEDIA_URL}}./../../../media/{{empresa.logo}}"
+                  class="card-img-top"
+                  alt="{{empresa.logo}}"
+                />
+                <div class="form-group">
+                  <label for="logo">Logo:</label>
+                  <input type="file" id="txtLogo" name="txtLogo" />
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <img
+                  src="{{MEDIA_URL}}./../../../media/{{empresa.favicon}}"
+                  class="card-img-top"
+                  alt="{{empresa.favicon}}"
+                />
+                <div class="form-group">
+                  <label for="favicon">Favicon:</label>
+                  <input type="file" id="txtFavicon" name="txtFavicon" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtTituloPagina"
+                  name="txtTituloPagina"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="100"
+                  value="{{empresa.tituloPagina}}"
+                  placeholder="titulo de la página"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="url"
+                  id="txtRuta"
+                  name="txtRuta"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="150"
+                  value="{{empresa.ruta}}"
+                  placeholder="http://www.ruta.com"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtSubdominio"
+                  name="txtSubdominio"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="100"
+                  value="{{empresa.subdominio}}"
+                  placeholder="subdominio"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtApodo"
+                  name="txtApodo"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="100"
+                  value="{{empresa.apodo}}"
+                  placeholder="apodo"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="email"
+                  id="txtEmail"
+                  name="txtEmail"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="100"
+                  value="{{empresa.email}}"
+                  placeholder="email"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="url"
+                  id="txtFacebook"
+                  name="txtFacebook"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="100"
+                  value="{{empresa.facebook}}"
+                  placeholder="http://www.facebook.com"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="url"
+                  id="txtTwitter"
+                  name="txtTwitter"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="100"
+                  value="{{empresa.twitter}}"
+                  placeholder="http://www.twitter.com"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="url"
+                  id="txtInstagram"
+                  name="txtInstagram"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="100"
+                  value="{{empresa.instagram}}"
+                  placeholder="http://www.instagram.com"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="url"
+                  id="txtYoutube"
+                  name="txtYoutube"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="100"
+                  value="{{empresa.youtube}}"
+                  placeholder="http://www.youtube.com"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="url"
+                  id="txtLinkedin"
+                  name="txtLinkedin"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="100"
+                  value="{{empresa.linkedin}}"
+                  placeholder="http://www.linkedin.com"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtTitulo1"
+                  name="txtTitulo1"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="100"
+                  value="{{empresa.titulo1}}"
+                  placeholder="titulo #1"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtSubTitulo1"
+                  name="txtSubTitulo1"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="200"
+                  value="{{empresa.subtitulo1}}"
+                  placeholder="subtitulo #1"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="contenedor">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <textarea
+                    class="form-control"
+                    placeholder="Descripcion 1"
+                    id="txtDescripcion1"
+                    name="txtDescripcion1"
+                    maxlength="500"
+                  >
+{{empresa.descripcion1}}</textarea
+                  >
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <img
+                    src="{{MEDIA_URL}}./../../../media/{{empresa.imagen1}}"
+                    class="card-img-top"
+                    alt="{{empresa.imagen1}}"
+                  />
+                  <div class="form-group">
+                    <label for="imagen1">Imagen #1:</label>
+                    <input type="file" id="txtImagen1" name="txtImagen1" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtTitulo2"
+                  name="txtTitulo2"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="100"
+                  value="{{empresa.titulo2}}"
+                  placeholder="titulo #2"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="txtSubTitulo2"
+                  name="txtSubTitulo2"
+                  class="form-control"
+                  minlength="3"
+                  maxlength="200"
+                  value="{{empresa.subtitulo2}}"
+                  placeholder="subtitulo #2"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="contenedor">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <textarea
+                    class="form-control"
+                    placeholder="Descripcion 2"
+                    id="txtDescripcion2"
+                    name="txtDescripcion2"
+                    maxlength="500"
+                  >
+{{empresa.descripcion2}}</textarea
+                  >
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <img
+                    src="{{MEDIA_URL}}./../../../media/{{empresa.imagen2}}"
+                    class="card-img-top"
+                    alt="{{empresa.imagen2}}"
+                  />
+                  <div class="form-group">
+                    <label for="imagen2">Imagen #2:</label>
+                    <input type="file" id="txtImagen2" name="txtImagen2" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contenedor">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="txtTitulo3"
+                    name="txtTitulo3"
+                    class="form-control"
+                    minlength="3"
+                    maxlength="100"
+                    placeholder="titulo #3"
+                    value="{{empresa.titulo3}}"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="txtSubTitulo3"
+                    name="txtSubTitulo3"
+                    class="form-control"
+                    minlength="3"
+                    maxlength="200"
+                    placeholder="subtitulo #3"
+                    value="{{empresa.subtitulo3}}"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <textarea
+                    class="form-control"
+                    placeholder="Descripcion 3"
+                    id="txtDescripcion3"
+                    name="txtDescripcion3"
+                    maxlength="500"
+                  >
+{{empresa.descripcion3}}</textarea
+                  >
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <img
+                    src="{{MEDIA_URL}}./../../../media/{{empresa.imagen3}}"
+                    class="card-img-top"
+                    alt="{{empresa.imagen3}}"
+                  />
+                  <div class="form-group">
+                    <label for="imagen3">Imagen #3:</label>
+                    <input type="file" id="txtImagen3" name="txtImagen3" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <textarea
+                  class="form-control"
+                  placeholder="Dirección"
+                  id="txtDireccion"
+                  name="txtDireccion"
+                  maxlength="100"
+                >
+{{empresa.descripcion2}}</textarea
+                >
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Gateway</label>
+                <select
+                  class="custom-select"
+                  id="txtGateway"
+                  name="txtGateway"
+                  style="margin-bottom: 20px"
+                >
+                  <option value="0"{% if empresa.gateway == 0 %} selected{% endif %}>Paypal</option>
+                  <option value="1"{% if empresa.gateway == 1 %} selected{% endif %}>Mercado Libre</option>
+                  <option value="2"{% if empresa.gateway == 2 %} selected{% endif %}>Stripe</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Environment</label>
+                <select
+                  class="custom-select"
+                  id="txtEnvironment"
+                  name="txtEnvironment"
+                  style="margin-bottom: 20px"
+                >
+                  <option value="0"{% if empresa.environment == 0 %} selected{% endif %}>Sandbox</option>
+                  <option value="1"{% if empresa.environment == 1 %} selected{% endif %}>Produccion</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="contenedor">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="txtSandbox"
+                    name="txtSandbox"
+                    class="form-control"
+                    minlength="3"
+                    maxlength="80"
+                    value="{{empresa.sandbox}}"
+                    placeholder="sandbox"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="txtProduccion"
+                    name="txtProduccion"
+                    class="form-control"
+                    minlength="3"
+                    maxlength="80"
+                    value="{{empresa.produccion}}"
+                    placeholder="produccion"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contenedor">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="txtSecret"
+                    name="txtSecret"
+                    class="form-control"
+                    minlength="3"
+                    maxlength="80"
+                    value="{{empresa.secret}}"
+                    placeholder="secret"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="txtAccessToken"
+                    name="txtAccessToken"
+                    class="form-control"
+                    minlength="3"
+                    maxlength="80"
+                    value="{{empresa.accessToken}}"
+                    placeholder="accessToken"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contenedor">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="txtPublicaStripe"
+                    name="txtPublicaStripe"
+                    class="form-control"
+                    minlength="3"
+                    maxlength="110"
+                    value="{{empresa.publicaStripe}}"
+                    placeholder="publicaStripe"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="txtSecretaStripe"
+                    name="txtSecretaStripe"
+                    class="form-control"
+                    minlength="3"
+                    maxlength="110"
+                    value="{{empresa.secretaStripe}}"
+                    placeholder="secretaStripe"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
           <div class="form-group">
-            <input
-              type="text"
-              id="txtTelefono"
-              name="txtTelefono"
-              class="form-control"
-              placeholder="Teléfono"
-              minlength="3"
-              maxlength="17"
-              required
-              value="{{empresa.telefono}}"
-            />
+            <div class="row">
+              <div class="col-sm-6">
+                <select
+                  class="custom-select"
+                  id="txtStatus"
+                  name="txtStatus"
+                  style="margin-bottom: 20px"
+                >
+                    <option value="0"{% if empresa.status == 0 %} selected{% endif %}>Inactivo</option>
+                    <option value="1"{% if empresa.status == 1 %} selected{% endif %}>Activo</option>
+                    <option value="2"{% if empresa.status == 2 %} selected{% endif %}>Eliminado</option>
+                </select>
+              </div>
+            </div>
           </div>
           <div class="form-group">
-            <input
-              type="text"
-              id="txtCiudad"
-              name="txtCiudad"
-              class="form-control"
-              minlength="3"
-              maxlength="50"
-              required
-              value="{{empresa.ciudad}}"
-            />
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-success btn-block text-white">
+            <button type="submit" class="btn btn-success text-white">
               Guardar
+            </button>
+            <button
+              type="button"
+              class="btn btn-warning text-black"
+              onclick="history.back()"
+            >
+              Cancelar
             </button>
           </div>
         </form>

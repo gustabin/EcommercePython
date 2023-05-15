@@ -1,0 +1,211 @@
+{% extends "./base.html" %}
+
+<!-- {% block title %} 
+Gestión de categorias 
+{% endblock%}  -->
+
+{% block body %}
+<div class="row">
+  <div class="col-md-4 offset-md-4">
+    <h2>Edición de producto</h2>
+    <div class="card">
+      <div class="card-body">
+        <form action="./../editarProducto/" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">
+            <input
+              type="hidden"
+              id="txtId"
+              name="txtId"              
+              value="{{producto.id}}"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtNombre"
+              name="txtNombre"
+              class="form-control"
+              placeholder="Nombre"
+              minlength="3"
+              maxlength="200"
+              required
+              value="{{producto.nombre}}"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtPrecio"
+              name="txtPrecio"
+              class="form-control"
+              placeholder="Precio"
+              maxlength="9"
+              required
+              value="{{producto.precio}}"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtDescripcion"
+              name="txtDescripcion"
+              class="form-control"
+              placeholder="Descripción"
+              maxlength="500"
+              required
+              value="{{producto.descripcion}}"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtEspecificacion"
+              name="txtEspecificacion"
+              class="form-control"
+              placeholder="Especificación"
+              maxlength="3000"
+              value="{{producto.especificacion}}"
+            />
+          </div>          
+          <div class="form-group">
+            <label>Marca</label>
+            <select name="txtMarca_id">
+              {% for marca in marcas %}
+                  <option value="{{ marca.id }}" {% if marca.id == producto.marca_id.id %}selected{% endif %}>{{ marca.nombre }}</option>
+              {% endfor %}
+            </select>          
+          </div>
+          <div class="form-group">
+            <label>Color</label>
+            <select name="txtColor_id">
+              {% for color in colores %}
+                  <option value="{{ color.id }}" {% if color.id == producto.color_id.id %}selected{% endif %}>{{ color.nombre }}</option>
+              {% endfor %}
+            </select>          
+          </div>
+          <div class="form-group">
+            <label>Talla</label>
+            <select name="txtTalla_id">
+              {% for talla in tallas %}
+                  <option value="{{ talla.id }}" {% if talla.id == producto.talla_id.id %}selected{% endif %}>{{ talla.nombre }}</option>
+              {% endfor %}
+            </select>          
+          </div>
+          <div class="form-group">
+            <img
+              src="{{MEDIA_URL}}./../../../media/{{producto.imagen}}"
+              class="card-img-top"
+              alt="{{producto.imagen}}"
+            />
+            <div class="form-group">
+                <label for="txtImagen">Imagen:</label>
+                <input type="file" id="txtImagen" name="txtImagen" />
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Categoria</label>
+            <select name="txtCategoria_id">
+              {% for categoria in categorias %}
+                  <option value="{{ categoria.id }}" {% if categoria.id == producto.categoria_id.id %}selected{% endif %}>{{ categoria.nombre }}</option>
+              {% endfor %}
+            </select>          
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtCodigo"
+              name="txtCodigo"
+              class="form-control"
+              placeholder="Código"
+              maxlength="30"
+              required
+              value="{{producto.codigo}}"
+            />
+          </div>
+          <div class="form-group">
+            <label>Promoción</label>
+            <select
+              class="custom-select"
+              id="txtPromocion"
+              name="txtPromocion"
+              style="margin-bottom: 20px"
+            >
+                <option value="0"{% if producto.promocion == 0 %} selected{% endif %}>Inactiva</option>
+                <option value="1"{% if producto.promocion == 1 %} selected{% endif %}>Activa</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtStock"
+              name="txtStock"
+              class="form-control"
+              placeholder="Stock"
+              maxlength="11"
+              required
+              value="{{producto.stock}}"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtOrden"
+              name="txtOrden"
+              class="form-control"
+              placeholder="Orden"
+              maxlength="2"
+              required
+              value="{{producto.orden}}"
+            />
+          </div>
+          <div class="form-group">
+            <select
+              class="custom-select"
+              id="txtStatus"
+              name="txtStatus"
+              style="margin-bottom: 20px"
+            >
+                <option value="0"{% if producto.status == 0 %} selected{% endif %}>Inactivo</option>
+                <option value="1"{% if producto.status == 1 %} selected{% endif %}>Activo</option>
+                <option value="2"{% if producto.status == 2 %} selected{% endif %}>Eliminado</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtCalificacion"
+              name="txtCalificacion"
+              class="form-control"
+              placeholder="Calificacion"
+              maxlength="1"
+              required
+              value="{{producto.calificacion}}"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtEmpresa_id"
+              name="txtEmpresa_id"
+              class="form-control"
+              placeholder="Empresa Id"
+              required
+              value="{{producto.empresa_id}}"
+            />
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success  text-white">
+              Guardar
+            </button>
+            <button type="button" class="btn btn-warning  text-black" onclick="history.back()">
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

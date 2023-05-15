@@ -26,10 +26,8 @@ urlpatterns = [
     path('', include('categories.urls')),
     path('marca/', include('marca.urls')),
     path('empresa/', include('empresa.urls')),
+    path('producto/', include('producto.urls')),
 ]
-
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-

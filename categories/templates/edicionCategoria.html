@@ -10,7 +10,11 @@ Gestión de categorias
     <h2>Edición de categorias</h2>
     <div class="card">
       <div class="card-body">
-        <form action="/editarCategoria/" method="POST">
+        <form
+          action="/editarCategoria/"
+          method="POST"
+          enctype="multipart/form-data"
+        >
           {% csrf_token %}
           <div class="form-group">
             <input
@@ -52,15 +56,25 @@ Gestión de categorias
             />
           </div>
           <div class="form-group">
+            <img
+              src="{{MEDIA_URL}}./../../../media/{{categoria.imagen}}"
+              class="card-img-top"
+              alt="{{categoria.imagen}}"
+            />
+            <div class="form-group">
+              <label for="txtImagen">Logo:</label>
+              <input type="file" id="txtImagen" name="txtImagen" />
+            </div>
+          </div>
+          <div class="form-group">
             <input
               type="text"
-              id="txtIdEmpresa"
-              name="txtIdEmpresa"
+              id="txtEmpresa_id"
+              name="txtEmpresa_id"
               class="form-control"
-              minlength="3"
               maxlength="100"
               required
-              value="{{categoria.idEmpresa}}"
+              value="{{categoria.empresa_id}}"
             />
           </div>
           <div class="form-group">

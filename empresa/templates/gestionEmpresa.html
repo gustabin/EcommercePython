@@ -114,27 +114,35 @@ Gestión de categorias
               <option value="Venezuela">Venezuela</option>
             </select>
           </div>
-          <div class="form-group">
-            <input
-              type="text"
-              id="txtImagen"
-              name="txtImagen"
-              class="form-control"
-              placeholder="Imagen"
-              minlength="3"
-              maxlength="50"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              type="text"
-              id="txtFavicon"
-              name="txtFavicon"
-              class="form-control"
-              placeholder="Favicon"
-              minlength="3"
-              maxlength="50"
-            />
+          <div class="contenedor">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <img
+                    src="{{MEDIA_URL}}./../../../media/{{marca.logo}}"
+                    class="card-img-top"
+                    alt="{{marca.logo}}"
+                  />
+                  <div class="form-group">
+                    <label for="txtLogo">Logo:</label>
+                    <input type="file" id="txtLogo" name="txtLogo" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <img
+                    src="{{MEDIA_URL}}./../../../media/{{marca.favicon}}"
+                    class="card-img-top"
+                    alt="{{marca.favicon}}"
+                  />
+                  <div class="form-group">
+                    <label for="txtFavicon">Favicon:</label>
+                    <input type="file" id="txtFavicon" name="txtFavicon" />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="row">
             <div class="col-sm-6">
@@ -167,8 +175,8 @@ Gestión de categorias
               <div class="form-group">
                 <input
                   type="text"
-                  id="txtSubDominio"
-                  name="txtSubDominio"
+                  id="txtSubdominio"
+                  name="txtSubdominio"
                   class="form-control"
                   placeholder="Sub Dominio"
                   maxlength="100"
@@ -298,6 +306,7 @@ Gestión de categorias
                 class="form-control"
                 placeholder="Descripcion 1"
                 id="txtDescripcion1"
+                name="txtDescripcion1"
                 maxlength="500"
               ></textarea>
             </div>
@@ -334,6 +343,7 @@ Gestión de categorias
                 class="form-control"
                 placeholder="Descripcion 2"
                 id="txtDescripcion2"
+                name="txtDescripcion2"
                 maxlength="500"
               ></textarea>
             </div>
@@ -370,6 +380,7 @@ Gestión de categorias
                 class="form-control"
                 placeholder="Descripcion 3"
                 id="txtDescripcion3"
+                name="txtDescripcion3"
                 maxlength="500"
               ></textarea>
             </div>
@@ -398,30 +409,38 @@ Gestión de categorias
               maxlength="100"
             />
           </div>
-          <div class="form-group">
-            <select
-              class="custom-select"
-              id="txtGateway"
-              name="txtGateway"
-              style="margin-bottom: 20px"
-            >
-              <option value="">Gateway</option>
-              <option value="Paypal">Paypal</option>
-              <option value="MercadoLibre">MercadoLibre</option>
-              <option value="Stripe">Stripe</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <select
-              class="custom-select"
-              id="txtEnvironment"
-              name="txtEnvironment"
-              style="margin-bottom: 20px"
-            >
-              <option value="">Environment</option>
-              <option value="Sandbox">Sandbox</option>
-              <option value="Produccion">Producción</option>
-            </select>
+          <div class="contenedor">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Gateway</label>
+                  <select
+                    class="custom-select"
+                    id="txtGateway"
+                    name="txtGateway"
+                    style="margin-bottom: 20px"
+                  >
+                    <option value="0">Paypal</option>
+                    <option value="1">MercadoLibre</option>
+                    <option value="2">Stripe</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Environment</label>
+                  <select
+                    class="custom-select"
+                    id="txtEnvironment"
+                    name="txtEnvironment"
+                    style="margin-bottom: 20px"
+                  >
+                    <option value="0">Sandbox</option>
+                    <option value="1">Producción</option>
+                  </select>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="contenedor">
             <div class="form-group">
@@ -490,16 +509,16 @@ Gestión de categorias
             </div>
           </div>
           <div class="form-group">
+            <label>Status</label>
             <select
               class="custom-select"
               id="txtStatus"
               name="txtStatus"
               style="margin-bottom: 20px"
             >
-              <option value="">Status</option>
-              <option value="Inactivo">Inactivo</option>
-              <option value="Activo">Activo</option>
-              <option value="Eliminado">Eliminado</option>
+              <option value="0">Inactivo</option>
+              <option value="1">Activo</option>
+              <option value="2">Eliminado</option>
             </select>
           </div>
           <div class="form-group">
@@ -548,12 +567,4 @@ Gestión de categorias
     </div>
   </div>
 </div>
-<style>
-  .contenedor {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 20px;
-  }
-</style>
-
 {% endblock %}

@@ -16,7 +16,11 @@ Gestión de categorias
     <h2>Gestión de categorias</h2>
     <div class="card">
       <div class="card-body">
-        <form action="/registrarCategoria/" method="POST">
+        <form
+          action="/registrarCategoria/"
+          method="POST"
+          enctype="multipart/form-data"
+        >
           {% csrf_token %}
           <div class="form-group">
             <input
@@ -42,15 +46,29 @@ Gestión de categorias
             />
           </div>
           <div class="form-group">
-            <input
-              type="text"
-              id="txtIdEmpresa"
-              name="txtIdEmpresa"
-              class="form-control"
-              minlength="3"
-              maxlength="100"
-              required
+            <img
+              src="{{MEDIA_URL}}./../../../media/{{categoria.imagen}}"
+              class="card-img-top"
+              alt="{{categoria.imagen}}"
             />
+            <div class="form-group">
+              <label for="txtImagen">Imagen:</label>
+              <input type="file" id="txtImagen" name="txtImagen" />
+            </div>
+          </div>
+          <div class="contenedor">
+            <div class="form-group">
+              <label>Promoción</label>
+              <select
+                class="custom-select"
+                id="txtPromocion"
+                name="txtPromocion"
+                style="margin-bottom: 20px"
+              >
+                <option value="0">Inactiva</option>
+                <option value="1">Normal</option>
+              </select>
+            </div>
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-success btn-block text-white">
@@ -72,7 +90,7 @@ Gestión de categorias
             <th>Descripción</th>
             <th>Imagen</th>
             <th>Status</th>
-            <th>IdEmpresa</th>
+            <th>Empresa id</th>
             <th colspan="2">Opciones</th>
           </tr>
         </thead>
@@ -82,9 +100,15 @@ Gestión de categorias
             <td>{{forloop.counter}}</td>
             <td>{{c.nombre}}</td>
             <td>{{c.descripcion}}</td>
-            <td>{{c.imagen}}</td>
+            <td>
+              <img
+                src="{{MEDIA_URL}}./../../../media/{{c.imagen}}"
+                class="card-img-top"
+                alt="{{c.imagen}}"
+              />
+            </td>
             <td>{{c.status}}</td>
-            <td>{{c.idEmpresa}}</td>
+            <td>{{c.empresa_id}}</td>
             <td>
               <a href="edicionCategoria/{{c.id}}" class="btn btn-info"
                 >Editar</a

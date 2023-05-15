@@ -3,3 +3,9 @@ td {
   text-align: center;
   vertical-align: middle;
 }
+
+.contenedor {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
